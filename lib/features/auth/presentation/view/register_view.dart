@@ -109,7 +109,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         radius: 50,
                         backgroundImage: _img != null
                             ? FileImage(_img!)
-                            : const AssetImage('assets/images/profile.png')
+                            : const AssetImage('assets/images/car.png')
                                 as ImageProvider,
                       ),
                     ),

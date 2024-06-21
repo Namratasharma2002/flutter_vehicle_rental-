@@ -5,7 +5,9 @@ import 'package:student_management_starter/features/auth/presentation/view/login
 
 final loginViewNavigatorProvider= Provider((ref) => LoginViewNavigator());
 
-class LoginViewNavigator with RegisterViewRoute{}
+class LoginViewNavigator with RegisterViewRoute{
+  void openHomeView() {}
+}
 
 mixin LoginViewRoute{
   openLoginView(){
