@@ -21,4 +21,6 @@ class AuthUseCase {
   Future<Either<Failure, bool>> loginUser(String email, String password) {
     return authRepository.loginUser(email, password);
   }
+
+  getCurrentUser() {}
 }

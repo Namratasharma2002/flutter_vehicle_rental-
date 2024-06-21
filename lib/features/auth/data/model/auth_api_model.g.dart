@@ -6,15 +6,14 @@ part of 'auth_api_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AuthApiModel _$AuthApiModelFromJson(Map<String, dynamic> json) {
-  return AuthApiModel(
-    id: json['_id'] as String?,
-    fName: json['fName'] as String,
-    lName: json['lName'] as String,
-    email: json['email'] as String,
-    password: json['password'] as String,
-  );
-}
+AuthApiModel _$AuthApiModelFromJson(Map<String, dynamic> json) => AuthApiModel(
+      id: json['_id'] as String,
+      fName: json['fName'] as String,
+      lName: json['lName'] as String,
+      email: json['email'] as String,
+      password: json['password'] as String?,
+      confirmpassword: json['confirmpassword'] as String?,
+    );
 
 Map<String, dynamic> _$AuthApiModelToJson(AuthApiModel instance) =>
     <String, dynamic>{
@@ -23,4 +22,5 @@ Map<String, dynamic> _$AuthApiModelToJson(AuthApiModel instance) =>
       'lName': instance.lName,
       'email': instance.email,
       'password': instance.password,
+      'confirmpassword': instance.confirmpassword,
     };

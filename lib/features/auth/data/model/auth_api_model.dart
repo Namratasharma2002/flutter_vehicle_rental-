@@ -1,70 +1,64 @@
-import 'package:equatable/equatable.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:student_management_starter/features/auth/domain/entity/auth_entity.dart';
-
+ 
 part 'auth_api_model.g.dart';
-
-final authApiModelProvider =
-    Provider<AuthApiModel>((ref) => const AuthApiModel.empty());
-
+ 
+final authApiModelProvider = Provider<AuthApiModel>((ref) =>  AuthApiModel.empty());
+ 
 @JsonSerializable()
-class AuthApiModel extends Equatable {
+class AuthApiModel {
   @JsonKey(name: '_id')
-  final String? id;
+  final String id;
   final String fName;
   final String lName;
   final String email;
-  final String password;
-
-  const AuthApiModel({
-    this.id,
-    required this.fName,
+  final String? password;
+  final String? confirmpassword;
+ 
+  AuthApiModel({
+    required this.id,
+    required this. fName,
     required this.lName,
     required this.email,
-    required this.password,
+    this.password,
+    this.confirmpassword,
   });
-
-  const AuthApiModel.empty()
-      : id = '',
-        fName = '',
-        lName = '',
-        email = '',
-        password = '';
-
+ 
+  factory AuthApiModel.empty() => AuthApiModel(
+        id: '',
+        fName: '',
+        lName: '',
+        email: '',
+        password: '',
+        confirmpassword: '',
+      );
+ 
+  factory AuthApiModel.fromJson(Map<String, dynamic> json) => _$AuthApiModelFromJson(json);
+ 
+  Map<String, dynamic> toJson() => _$AuthApiModelToJson(this);
+ 
   AuthEntity toEntity() {
     return AuthEntity(
-      userId: id,
+      id: id,
       fName: fName,
       lName: lName,
       email: email,
-      password: password, username: '',
+      password: password ?? '',
+      confirmPassword: confirmpassword ?? '',
     );
   }
-
-  factory AuthApiModel.fromEntity(AuthEntity entity) {
+ 
+ 
+  static AuthApiModel fromEntity(AuthEntity entity) {
     return AuthApiModel(
-      id: entity.userId,
+      id: entity.userId ?? '',
       fName: entity.fName,
-      email: entity.email,
       lName: entity.lName,
+      email: entity.email,
       password: entity.password,
+      confirmpassword: entity.confirmPassword,
     );
   }
-
-  factory AuthApiModel.fromJson(Map<String, dynamic> json) =>
-      _$AuthApiModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AuthApiModelToJson(this);
-
-  @override
-  List<Object?> get props => [
-        id,
-        fName,
-        lName,
-        email,
-        password,
-      ];
-
-  fromEntity(AuthEntity authEntity) {}
 }
